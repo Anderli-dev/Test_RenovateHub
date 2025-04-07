@@ -61,3 +61,5 @@ docker-compose.dev.yml
 .env.local
 .env.production
 .env.dev
+
+.ruff_cache
