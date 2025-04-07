@@ -1,0 +1,40 @@
+services:
+  backend:
+    build: 
+      context: .
+      args:
+        APP_PORT: ${APP_PORT}
+        APP_HOST: ${APP_HOST}
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    restart: always
+    depends_on:
+      pgdb:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://${APP_HOST}:${APP_PORT}/']
+      interval: 30s
+      timeout: 10s
+      start_period: 10s
+      retries: 2
+    volumes:
+      - .:/app
+
+  pgdb:
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
