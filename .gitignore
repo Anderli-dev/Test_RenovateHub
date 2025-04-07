@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdm.toml.lock
+*.env
+*.env.*
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+static/
+local_settings.py
+
+# Virtual Environments
+venv/
+.env/
+!.env.sample
+.venv/
+pip-wheel-metadata/
+site/
+.idea/
+.vscode/
+
+# Ruff cache
+.pyright/
+ruff_cache/
+
+# Pytest / Coverage
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.cache
+
+# Docker
+*.pid
+*.pid.lock
+*.tar
+docker-compose.override.yml
+docker-compose.dev.yml
+
+# IDEs & Editors
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+
+# Other
+*.sqlite3
+.env.docker
+.env.db
+.env.local
+.env.production
+.env.dev
