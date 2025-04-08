@@ -1,4 +1,111 @@
 {% extends "base.html" %}
 {% block body %}
-    <h1>Hello world!</h1>
+    <div class="container my-4">
+        <div class="row justify-content-center gap-4">
+            <div class="card px-0 col-md-12 col-xl-10">
+                <div class="card-header d-flex align-items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                    </svg>
+                    <h2 class="mb-0">Some task title</h2>
+
+                    <h2 class="mb-0">Btn's for edit and delete</h2>
+                </div>
+
+                <nav class="card-header bg-body-tertiary ps-0">
+                    <div class="d-flex align-items-center">
+                        <button class="btn" type="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </button>
+                        
+                        <form class="flex-grow-1 me-2">
+                            <input class="form-control col-sm" type="search" placeholder="Start typing here to create a task..." aria-label="Add Task">
+                        </form>
+                        
+                        <button class="btn btn-outline-success" type="submit">Add Task</button>
+                    </div>
+                </nav>
+
+                <div >
+                    <ul class="container d-flex flex-column">
+                        <li class="d-flex align-items-center justify-content-between">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="item1">
+                                <label class="form-check-label ms-2" for="item1">
+                                    Task 1
+                                </label>
+                                </div>
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-sm btn-primary action-btn" style="--bs-btn-padding-y: 0;" data-action="edit" data-id="1">Up/Down</button>
+                                <button class="btn btn-sm btn-warning action-btn" style="--bs-btn-padding-y: 0;" data-action="archive" data-id="1">Edit</button>
+                                <button class="btn btn-sm btn-danger action-btn" style="--bs-btn-padding-y: 0;" data-action="delete" data-id="1">Delete</button>
+                            </div>
+                        </li>
+                    
+                        <li class="d-flex align-items-center justify-content-between">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="item1">
+                                <label class="form-check-label ms-2" for="item1">
+                                    Task 2
+                                </label>
+                                </div>
+                        </li>
+
+                        <li class="d-flex align-items-center justify-content-between">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="item1">
+                                <label class="form-check-label ms-2" for="item1">
+                                    Task 3
+                                </label>
+                                </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="card px-0 col-md-12 col-xl-10">
+                <div class="card-header d-flex align-items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
+                    </svg>
+                    <h2 class="mb-0">Some task title</h2>
+                </div>
+
+                <nav class="card-header bg-body-tertiary ps-0">
+                    <div class="d-flex align-items-center">
+                        <button class="btn" type="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </button>
+                        
+                        <form class="flex-grow-1 me-2">
+                            <input class="form-control col-sm" type="search" placeholder="Start typing here to create a task..." aria-label="Add Task">
+                        </form>
+                        
+                        <button class="btn btn-outline-success" type="submit">Add Task</button>
+                    </div>
+                </nav>
+
+                <div >
+                    <ul class="list-group rounded-0">
+                        <li class="list-group-item d-flex align-items-center justify-content-between">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="item1">
+                                <label class="form-check-label ms-2" for="item1">
+                                    Task 1
+                                </label>
+                                </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
