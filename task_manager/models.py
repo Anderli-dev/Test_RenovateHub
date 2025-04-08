@@ -26,9 +26,10 @@ class Task(models.Model):
         choices=Priority.choices,
         default=Priority.MEDIUM,
     )
+    deadline = models.DateField(null=True, blank=True)
 
     class Meta:
-        ordering = ["status", "priority"]
+        ordering = ["status", "deadline", "priority"]
         
     def __str__(self):
         return self.name
