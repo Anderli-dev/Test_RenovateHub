@@ -1,0 +1,27 @@
+{% block task-form %}
+    <form
+    method="POST"
+    action=""
+    id="task-form"
+    hx-post=""
+    hx-target="#task-form"
+    hx-swap="outerHTML"
+    hx-vals='{"use_block": "task-form"}'
+    >
+            <ul class="container d-flex flex-column">
+                <li class="d-flex align-items-center justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="item1">
+                        <label class="form-check-label ms-2" for="item1">
+                            {{ task.name }}
+                        </label>
+                        </div>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-sm btn-primary action-btn" style="--bs-btn-padding-y: 0;" data-action="edit" data-id="1">Up/Down</button>
+                        <button class="btn btn-sm btn-warning action-btn" style="--bs-btn-padding-y: 0;" data-action="archive" data-id="1">Edit</button>
+                        <button class="btn btn-sm btn-danger action-btn" style="--bs-btn-padding-y: 0;" data-action="delete" data-id="1">Delete</button>
+                    </div>
+                </li>
+            </ul>
+    </form>
+{% endblock %}
