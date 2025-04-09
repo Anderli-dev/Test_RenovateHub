@@ -27,6 +27,7 @@ class Task(models.Model):
         default=Priority.MEDIUM,
     )
     deadline = models.DateField(null=True, blank=True)
+    order = models.PositiveIntegerField(default=0, db_index=True)
 
     class Meta:
         ordering = ["-deadline", "-status", "-priority"]
