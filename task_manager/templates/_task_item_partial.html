@@ -19,7 +19,14 @@
                     <div class="d-flex gap-3">
                         <button class="btn btn-sm btn-primary action-btn" style="--bs-btn-padding-y: 0;" data-action="edit" data-id="1">Up/Down</button>
                         <button class="btn btn-sm btn-warning action-btn" style="--bs-btn-padding-y: 0;" data-action="archive" data-id="1">Edit</button>
-                        <button class="btn btn-sm btn-danger action-btn" style="--bs-btn-padding-y: 0;" data-action="delete" data-id="1">Delete</button>
+                        <button 
+                        class="btn btn-sm btn-danger action-btn" 
+                        style="--bs-btn-padding-y: 0;"
+                        hx-delete="{% url 'task_delete' task.id %}"
+                        hx-target="#project-{{project.id}}"
+                        >
+                        Delete
+                        </button>
                     </div>
                 </li>
             </ul>

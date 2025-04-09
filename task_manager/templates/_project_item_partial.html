@@ -14,7 +14,7 @@ id="project-{{project.id}}"
         hx-trigger="click"
         hx-get="{% url 'modals_edit_project' project.id %}"
         hx-target="body"
-        hx-swap="beforeend"
+        hx-swap="outerHTML"
         >
         edit
         </button>

@@ -2,7 +2,7 @@ from task_manager.views.home import home
 from django.urls import path
 
 from task_manager.views.modals import create_project, delete_project, edit_project
-from task_manager.views.task import task_add
+from task_manager.views.task import task_add, task_delete
 
 urlpatterns = [
     path('', home, name='home'),
@@ -11,4 +11,5 @@ urlpatterns = [
     path('modals/<int:id>/delete/', delete_project, name='modals_delete_project'),
     
     path('task-add/', task_add, name='task_add'),
+    path('task/<int:id>/delete/', task_delete, name='task_delete'),
 ]
