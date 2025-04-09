@@ -1,6 +1,9 @@
 <div 
 class="card px-0 col-md-12 col-xl-10"
 id="project-{{project.id}}"
+hx-trigger="taskChanged from:body"
+hx-get="{% url 'get_project' project.id %}"
+hx-target="#project-{{project.id}}"
 >
     <div class="card-header d-flex align-items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
@@ -14,7 +17,7 @@ id="project-{{project.id}}"
         hx-trigger="click"
         hx-get="{% url 'modals_edit_project' project.id %}"
         hx-target="body"
-        hx-swap="outerHTML"
+        hx-swap="beforeend"
         >
         edit
         </button>

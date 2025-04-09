@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 
-from task_manager.forms import ProjectForm
+from task_manager.forms import ProjectForm, TaskEditForm
 from task_manager.models import Project, Task
 
 from ..utils import for_htmx
@@ -68,3 +68,23 @@ def delete_project(request: HttpRequest, id: int):
         )
 
     return TemplateResponse(request, "modals_delete_project.html")
+
+def edit_task(request: HttpRequest, id: int):
+    task = get_object_or_404(Task, id=id)
+    if request.method == "POST":
+        form = TaskEditForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(
+                headers={
+                    "Hx-Trigger": json.dumps(
+                        {
+                            "closeModal": True,
+                            "taskChanged": id,
+                        }
+                    )
+                }
+            )
+    else:
+        form = TaskEditForm(instance=task)
+    return TemplateResponse(request, "modals_edit_task.html", {"form": form})

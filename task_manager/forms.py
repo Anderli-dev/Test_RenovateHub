@@ -8,9 +8,26 @@ class ProjectForm(ModelForm):
         model = Project
         fields = ["name"]
         
-class TaskForm(ModelForm):
+class TaskCreateForm(ModelForm):
     project_id = forms.IntegerField(widget=forms.HiddenInput())
     
     class Meta:
         model = Task
         fields = ["name", "project_id"]
+        
+class TaskEditForm(ModelForm):
+    class Meta:
+        model = Task
+        fields = ["name", "priority", "deadline"]
+        widgets = {
+            "name": forms.TextInput(attrs={
+                "class": "form-control",
+            }),
+            "priority": forms.Select(attrs={
+                "class": "form-select"
+            }),
+            "deadline": forms.DateInput(attrs={
+                "class": "form-control",
+                "type": "date"
+            }),
+        }

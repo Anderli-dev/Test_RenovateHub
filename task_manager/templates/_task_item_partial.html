@@ -1,13 +1,5 @@
 {% block task-form %}
-    <form
-    method="POST"
-    action=""
-    id="task-form"
-    hx-post=""
-    hx-target="#task-form"
-    hx-swap="outerHTML"
-    hx-vals='{"use_block": "task-form"}'
-    >
+    <div id="task-btns">
             <ul class="container d-flex flex-column">
                 <li class="d-flex align-items-center justify-content-between">
                     <div class="form-check">
@@ -17,8 +9,17 @@
                         </label>
                         </div>
                     <div class="d-flex gap-3">
-                        <button class="btn btn-sm btn-primary action-btn" style="--bs-btn-padding-y: 0;" data-action="edit" data-id="1">Up/Down</button>
-                        <button class="btn btn-sm btn-warning action-btn" style="--bs-btn-padding-y: 0;" data-action="archive" data-id="1">Edit</button>
+                        <button class="btn btn-sm btn-primary action-btn" style="--bs-btn-padding-y: 0;" >Up/Down</button>
+                        <button 
+                        class="btn btn-sm btn-warning action-btn" 
+                        style="--bs-btn-padding-y: 0;"
+                        hx-trigger="click"
+                        hx-get="{% url 'modals_edit_task' task.id %}"
+                        hx-target="#project-{{project.id}}"
+                        hx-swap="beforeend"
+                        >
+                        Edit
+                        </button>
                         <button 
                         class="btn btn-sm btn-danger action-btn" 
                         style="--bs-btn-padding-y: 0;"
@@ -30,5 +31,5 @@
                     </div>
                 </li>
             </ul>
-    </form>
+    </div>
 {% endblock %}

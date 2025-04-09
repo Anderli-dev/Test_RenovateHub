@@ -29,7 +29,7 @@ class Task(models.Model):
     deadline = models.DateField(null=True, blank=True)
 
     class Meta:
-        ordering = ["status", "deadline", "priority"]
+        ordering = ["-deadline", "-status", "-priority"]
         
     def __str__(self):
         return self.name
