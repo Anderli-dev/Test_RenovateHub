@@ -9,6 +9,7 @@ urlpatterns = [
     path('project/<int:id>', project.get_project, name='get_project'),
     path('task-add/', task.task_add, name='task_add'),
     path('task/<int:id>/delete/', task.task_delete, name='task_delete'),
+    path('task_reorder/', task.task_reorder, name='task_reorder'),
     path(
         'modals_edit_task/<int:id>/edit/', 
         modals.edit_task, 

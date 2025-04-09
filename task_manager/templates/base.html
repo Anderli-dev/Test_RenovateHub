@@ -6,6 +6,7 @@
     <head>
         <title>Task manager</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         {% htmx_script %}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
         {% block extrahead %}
@@ -14,4 +15,80 @@
     <body>
         {% block body %}{% endblock %}
     </body>
+    <script>
+        /*
+            ┌────────────────────────────────────┐
+            │         Цей код вкрадений          │
+            │     Але вкрав його не я, а уточка) │
+            └────────────────────────────────────┘
+
+                 _
+          Кря! >(.)__
+                (___/    
+        */
+        let draggedEl = null;
+        
+        function onDragStart(event) {
+            draggedEl = event.currentTarget;
+            event.dataTransfer.effectAllowed = "move";
+        }
+        
+        function onDragOver(event) {
+            event.preventDefault();
+        }
+        
+        function onDrop(event, projectID) {
+            event.preventDefault();
+        
+            const dropTarget = event.currentTarget;
+            if (!draggedEl || draggedEl === dropTarget) return;
+        
+            const list = document.getElementById(`tasks-list-${projectID}`);
+        
+            if (draggedEl.compareDocumentPosition(dropTarget) & Node.DOCUMENT_POSITION_FOLLOWING) {
+                list.insertBefore(draggedEl, dropTarget.nextSibling);
+            } else {
+                list.insertBefore(draggedEl, dropTarget);
+            }
+        
+            updateOrder(projectID);
+        }
+        
+        function updateOrder(projectID) {
+            const taskItems = document.querySelectorAll(`#tasks-list-${projectID} [data-task-id]`);
+            taskItems.forEach((el, index) => {
+                const taskId = el.dataset.taskId;
+                
+                const newOrder = index;
+        
+                const badge = el.querySelector(".badge");
+                if (badge) {
+                    badge.textContent = "#" + newOrder;
+                }
+        
+                fetch("{% url 'task_reorder' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `task_id=${taskId}&new_order=${newOrder}`
+                });
+            });
+        }
+        
+        function moveTask(buttonEl, direction, projectID) {
+            const currentItem = buttonEl.closest("[data-task-id]");
+            const list = document.getElementById(`tasks-list-${projectID}`);
+        
+            if (direction === "up" && currentItem.previousElementSibling) {
+                list.insertBefore(currentItem, currentItem.previousElementSibling);
+            } else if (direction === "down" && currentItem.nextElementSibling) {
+                list.insertBefore(currentItem.nextElementSibling, currentItem);
+            }
+        
+            updateOrder(projectID);
+        }
+        </script>
+        
 </html>
