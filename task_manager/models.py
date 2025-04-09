@@ -30,7 +30,7 @@ class Task(models.Model):
     order = models.PositiveIntegerField(default=0, db_index=True)
 
     class Meta:
-        ordering = ["-deadline", "-status", "-priority"]
+        ordering = ["order", "-deadline", "-status", "-priority"]
         
     def __str__(self):
         return self.name
