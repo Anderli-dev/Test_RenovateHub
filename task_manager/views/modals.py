@@ -23,7 +23,7 @@ def create_project(request: HttpRequest):
                     "Hx-Trigger": json.dumps(
                         {
                             "closeModal": True,
-                            "projectCreated": project.id,
+                            "projectChanged": project.id,
                         }
                     )
                 }
@@ -43,7 +43,7 @@ def edit_project(request: HttpRequest, id: int):
                     "Hx-Trigger": json.dumps(
                         {
                             "closeModal": True,
-                            "projectEdit": id,
+                            "projectChanged": id,
                         }
                     )
                 }
@@ -51,3 +51,20 @@ def edit_project(request: HttpRequest, id: int):
     else:
         form = ProjectForm(instance=project)
     return TemplateResponse(request, "modals_edit_project.html", {"form": form})
+
+def delete_project(request: HttpRequest, id: int):
+    project = get_object_or_404(Project,id=id)
+    if request.method == "DELETE":
+        project.delete()
+        return HttpResponse(
+            headers={
+                "Hx-Trigger": json.dumps(
+                    {
+                        "closeModal": True,
+                        "projectChanged": id,
+                    }
+                )
+            }
+        )
+
+    return TemplateResponse(request, "modals_delete_project.html")

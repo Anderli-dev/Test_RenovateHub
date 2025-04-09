@@ -1,0 +1,16 @@
+<dialog id="dialog-main" data-onload-showmodal>
+    {% block dialog-contents %}
+        <form
+            hx-delete="{{ request.get_full_path }}"
+            hx-target="#dialog-main"
+            hx-vals='{"use_block": "dialog-contents"}'
+            hx-swap="innerHTML"
+        >
+
+        <h3>Are You Sure?</h3>
+
+        <button type="submit">Delete</button>
+        <form method="dialog"><button>Cancel</button></form>
+        </form>
+    {% endblock %}
+</dialog>

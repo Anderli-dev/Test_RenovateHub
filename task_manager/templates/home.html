@@ -6,21 +6,18 @@
             {% block projects-list %}
                 <div
                 id="projects-list"
-                hx-trigger="projectCreated from:body"
+                hx-trigger="projectChanged from:body"
                 hx-get="."
                 hx-vals='{"use_block": "projects-list"}'
                 hx-target="#projects-list"
                 hx-swap="outerHTML"
                 >
                     {% if projects %}
+                    {% comment %} TODO like partial template {% endcomment %}
                         {% for project in projects %}
                             <div 
                             class="card px-0 col-md-12 col-xl-10"
                             id="project_{{project.id}}"
-                            hx-trigger="projectEdit from:body"
-                            hx-get="."
-                            hx-target="#projects-list"
-                            hx-swap="outerHTML"
                             >
                                 <div class="card-header d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
@@ -37,7 +34,14 @@
                                     >
                                     edit
                                     </button>
-                                    <button class="mb-0">delete</button>
+                                    <button 
+                                    class="mb-0"
+                                    hx-get="{% url 'modals_delete_project' project.id %}"
+                                    hx-target="body"
+                                    hx-swap="beforeend"
+                                    >
+                                    delete
+                                </button>
                                 </div>
 
                                 <nav class="card-header bg-body-tertiary ps-0">
