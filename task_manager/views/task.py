@@ -11,6 +11,7 @@ from task_manager.utils import render_htmx_error
 
 
 @require_POST
+@login_required
 def task_add(request: HttpRequest):
     form = TaskCreateForm(request.POST)
     project = get_object_or_404(Project, id=request.POST.get("project_id"))
@@ -36,6 +37,7 @@ def task_add(request: HttpRequest):
     )
     
 @require_POST
+@login_required
 def task_delete(request: HttpRequest, task_id: int):
     task = get_object_or_404(Task, id=task_id)
     project = task.project

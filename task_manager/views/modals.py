@@ -42,6 +42,9 @@ def create_project(request: HttpRequest):
 @login_required
 def edit_project(request: HttpRequest, id: int):
     project = get_object_or_404(Project, id=id)
+    if project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
+    
     if request.method == "POST":
         form = ProjectForm(request.POST, instance=project)
         if form.is_valid():
@@ -62,9 +65,15 @@ def edit_project(request: HttpRequest, id: int):
         form = ProjectForm(instance=project)
     return TemplateResponse(request, "modals_edit_project.html", {"form": form})
 
+@require_http_methods(["GET", "POST"])
+@login_required 
 def delete_project(request: HttpRequest, id: int):
     project = get_object_or_404(Project, id=id)
-    if request.method == "DELETE":
+    
+    if project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
+    
+    if request.method == "POST":
         project.delete()
         return HttpResponse(
             headers={
@@ -79,8 +88,15 @@ def delete_project(request: HttpRequest, id: int):
 
     return TemplateResponse(request, "modals_delete_project.html")
 
+@require_http_methods(["GET", "POST"])
+@login_required 
 def edit_task(request: HttpRequest, task_id: int):
     task = get_object_or_404(Task, id=task_id)
+    project = task.project
+    print(project.user, request.user)
+    if project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
+    
     if request.method == "POST":
         form = TaskEditForm(request.POST, instance=task)
         if form.is_valid():
@@ -95,6 +111,8 @@ def edit_task(request: HttpRequest, task_id: int):
                     )
                 }
             )
+        else: 
+            return render_htmx_error(request, "Wrong input data!", 400)
     else:
         form = TaskEditForm(instance=task)
     return TemplateResponse(request, "modals_edit_task.html", {"form": form})

@@ -2,7 +2,7 @@
 class="card px-0 col-md-12 col-xl-10"
 id="project-{{project.id}}"
 hx-trigger="taskChanged from:body"
-hx-get="{% url 'get_project' 53 %}"
+hx-get="{% url 'get_project' project.id %}"
 hx-target="#project-{{project.id}}"
 hx-target-error="#error-modal"
 >

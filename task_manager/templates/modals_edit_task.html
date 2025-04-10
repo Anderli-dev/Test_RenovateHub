@@ -3,6 +3,7 @@
         <form
             hx-post="{{ request.get_full_path }}"
             hx-target="#dialog-main"
+            hx-target-4*="#error-modal"
             hx-vals='{"use_block": "dialog-contents"}'
             hx-swap="innerHTML"
         >

@@ -48,6 +48,7 @@
                         hx-trigger="click"
                         hx-get="{% url 'modals_edit_task' task.id %}"
                         hx-target="#project-{{project.id}}"
+                        hx-target-4*="#error-modal"
                         hx-swap="beforeend"
                         >
                         Edit
