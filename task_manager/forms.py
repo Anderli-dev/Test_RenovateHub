@@ -8,12 +8,24 @@ class ProjectForm(ModelForm):
         model = Project
         fields = ["name"]
         
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+        if not name:
+            raise forms.ValidationError("Name cannot be empty")
+        return name
+        
 class TaskCreateForm(ModelForm):
     project_id = forms.IntegerField(widget=forms.HiddenInput())
     
     class Meta:
         model = Task
         fields = ["name", "project_id"]
+    
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+        if not name:
+            raise forms.ValidationError("Name cannot be empty")
+        return name
         
 class TaskEditForm(ModelForm):
     class Meta:
@@ -31,3 +43,9 @@ class TaskEditForm(ModelForm):
                 "type": "date"
             }),
         }
+        
+    def clean_name(self):
+        name = self.cleaned_data["name"].strip()
+        if not name:
+            raise forms.ValidationError("Name cannot be empty")
+        return name
