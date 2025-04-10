@@ -1,58 +1,65 @@
 {% extends "base.html" %}
 {% block body %}
-    <div class="container my-4">
-        <div class="row justify-content-center gap-4">
+    {% if user.is_authenticated %}
+        <div class="container my-4">
+            <div class="row justify-content-center gap-4">
 
-            {% block projects-list %}
-                <div
-                id="projects-list"
-                hx-trigger="projectChanged from:body"
-                hx-get="."
-                hx-vals='{"use_block": "projects-list"}'
-                hx-target="#projects-list"
-                hx-swap="outerHTML"
+                {% block projects-list %}
+                    <div
+                    id="projects-list"
+                    hx-trigger="projectChanged from:body"
+                    hx-get="."
+                    hx-vals='{"use_block": "projects-list"}'
+                    hx-target="#projects-list"
+                    hx-swap="outerHTML"
+                    >
+                        {% if projects %}
+                            {% for project in projects %}
+                                {% include "_project_item_partial.html" %}
+                            {% endfor %}
+                        {% else %}
+                            <h2>No projects</h2>
+                        {% endif %}
+                        {% comment %} TODO partial load {% endcomment %}
+                    </div>
+                {% endblock %}
+                
+                <button 
+                hx-trigger="click"
+                hx-get="{% url 'modals_add_project' %}"
+                hx-target="body"
+                hx-swap="beforeend"
                 >
-                    {% if projects %}
-                        {% for project in projects %}
-                            {% include "_project_item_partial.html" %}
-                        {% endfor %}
-                    {% else %}
-                        <h2>No projects</h2>
-                    {% endif %}
-                    {% comment %} TODO partial load {% endcomment %}
-                </div>
-            {% endblock %}
-            
-            <button 
-            hx-trigger="click"
-            hx-get="{% url 'modals_add_project' %}"
-            hx-target="body"
-            hx-swap="beforeend"
-            >
-            Add project
-            </button>
+                Add project
+                </button>
+            </div>
         </div>
-    </div>
 
-    <script>
-        document.body.setAttribute('hx-headers', '{"X-CSRFToken": "{{ csrf_token }}"}');
-    </script>
+        <script>
+            document.body.setAttribute('hx-headers', '{"X-CSRFToken": "{{ csrf_token }}"}');
+        </script>
 
-    <script>
-        document.body.addEventListener("htmx:afterSettle", function(detail) {
-            const dialog = detail.target.querySelector('dialog[data-onload-showmodal]');
-            if (dialog) {
-                dialog.showModal();
-                dialog.addEventListener("close", () => {
-                    dialog.remove();
-                });
-            };
-        });
-    </script>
+        <script>
+            document.body.addEventListener("htmx:afterSettle", function(detail) {
+                const dialog = detail.target.querySelector('dialog[data-onload-showmodal]');
+                if (dialog) {
+                    dialog.showModal();
+                    dialog.addEventListener("close", () => {
+                        dialog.remove();
+                    });
+                };
+            });
+        </script>
 
-    <script>
-        document.body.addEventListener('closeModal', function() {
-            document.querySelector('dialog[open]').close();
-        });
-    </script>
+        <script>
+            document.body.addEventListener('closeModal', function() {
+                document.querySelector('dialog[open]').close();
+            });
+        </script>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Hello!</h4>
+            <p>Please, <a href="/accounts/login">log in to your account</a>, to view your projects and tasks.</p>
+        </div>
+    {% endif %}
 {% endblock %}
