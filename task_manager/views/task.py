@@ -1,5 +1,4 @@
-
-import json
+from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
@@ -53,8 +52,10 @@ def task_delete(request: HttpRequest, task_id: int):
             "project": project,
         },
     )
-    
+
+
 @require_POST
+@login_required
 def task_reorder(request):
     try:
         task_id = int(request.POST.get("task_id"))
@@ -65,7 +66,7 @@ def task_reorder(request):
     task = get_object_or_404(Task, id=task_id)
     project = task.project
 
-    if not request.user.is_authenticated or project.user != request.user:
+    if project.user != request.user:
         return render_htmx_error(request, "Access denied!", 403)
     
     if new_order < 0:
@@ -97,11 +98,12 @@ def task_reorder(request):
     )
     
 @require_POST
+@login_required
 def toggle_task_status(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     project = task.project
 
-    if not request.user.is_authenticated or project.user != request.user:
+    if project.user != request.user:
         return render_htmx_error(request, "Access denied!", 403)
     
     task.toggle_status()

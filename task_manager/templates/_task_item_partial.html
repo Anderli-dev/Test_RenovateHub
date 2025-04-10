@@ -18,6 +18,7 @@
                         hx-trigger="change"
                         hx-post="{% url 'toggle_task_status' task_id=task.id %}"
                         hx-target="#project-{{ project.id }}"
+                        hx-target-4*="#error-modal"
                         hx-swap="outerHTML"
                         >
                         <label class="form-check-label ms-2" for="item1">

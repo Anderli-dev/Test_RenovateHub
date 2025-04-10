@@ -1,15 +1,19 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
+from django.views.decorators.http import require_http_methods
 
 from task_manager.forms import ProjectForm, TaskEditForm
 from task_manager.models import Project, Task
 
-from ..utils import for_htmx
+from task_manager.utils import for_htmx, render_htmx_error
 
 
+@require_http_methods(["GET", "POST"])
+@login_required 
 @for_htmx(use_block_from_params=True)
 def create_project(request: HttpRequest):
     if request.method == "POST":
@@ -28,6 +32,8 @@ def create_project(request: HttpRequest):
                     )
                 }
             )
+        else: 
+            return render_htmx_error(request, "Wrong input data!", 403)
     else:
         form = ProjectForm()
     return TemplateResponse(request, "modals_add_project.html", {"form": form})
