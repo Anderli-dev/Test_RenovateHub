@@ -32,8 +32,8 @@ def task_add(request: HttpRequest):
         },
     )
     
-def task_delete(request: HttpRequest, id: int):
-    task = get_object_or_404(Task, id=id)
+def task_delete(request: HttpRequest, task_id: int):
+    task = get_object_or_404(Task, id=task_id)
     project = get_object_or_404(Project, id=task.project.id)
     
     if request.method == "DELETE":
@@ -71,6 +71,19 @@ def task_reorder(request):
         
     project = get_object_or_404(Project, id=task.project.id)
     
+    return TemplateResponse(
+        request,
+        "_project_item_partial.html",
+        {
+            "project": project,
+        },
+    )
+    
+def toggle_task_status(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.toggle_status()
+    print(task.status)
+    project = get_object_or_404(Project, id=task.project.id)
     return TemplateResponse(
         request,
         "_project_item_partial.html",

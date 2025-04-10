@@ -69,8 +69,8 @@ def delete_project(request: HttpRequest, id: int):
 
     return TemplateResponse(request, "modals_delete_project.html")
 
-def edit_task(request: HttpRequest, id: int):
-    task = get_object_or_404(Task, id=id)
+def edit_task(request: HttpRequest, task_id: int):
+    task = get_object_or_404(Task, id=task_id)
     if request.method == "POST":
         form = TaskEditForm(request.POST, instance=task)
         if form.is_valid():
@@ -80,7 +80,7 @@ def edit_task(request: HttpRequest, id: int):
                     "Hx-Trigger": json.dumps(
                         {
                             "closeModal": True,
-                            "taskChanged": id,
+                            "taskChanged": task_id,
                         }
                     )
                 }

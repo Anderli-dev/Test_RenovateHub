@@ -32,6 +32,10 @@ class Task(models.Model):
     class Meta:
         ordering = ["order"]
         
+    def toggle_status(self):
+        self.status = not self.status
+        self.save()
+        
     def __str__(self):
         return self.name
     
