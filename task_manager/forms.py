@@ -12,6 +12,8 @@ class ProjectForm(ModelForm):
         name = self.cleaned_data["name"].strip()
         if not name:
             raise forms.ValidationError("Name cannot be empty")
+        if '<' in name or '>' in name:
+            raise forms.ValidationError("HTML tags are not allowed")
         return name
         
 class TaskCreateForm(ModelForm):
@@ -23,10 +25,10 @@ class TaskCreateForm(ModelForm):
     
     def clean_name(self):
         name = self.cleaned_data["name"].strip()
-        if '<' in name or '>' in name:
-            raise forms.ValidationError("HTML tags are not allowed")
         if not name:
             raise forms.ValidationError("Name cannot be empty")
+        if '<' in name or '>' in name:
+            raise forms.ValidationError("HTML tags are not allowed")
         return name
         
 class TaskEditForm(ModelForm):
@@ -50,4 +52,6 @@ class TaskEditForm(ModelForm):
         name = self.cleaned_data["name"].strip()
         if not name:
             raise forms.ValidationError("Name cannot be empty")
+        if "<" in name or ">" in name:
+            raise forms.ValidationError("HTML-теги заборонено.")
         return name
