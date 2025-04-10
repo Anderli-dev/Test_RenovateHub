@@ -23,6 +23,8 @@ class TaskCreateForm(ModelForm):
     
     def clean_name(self):
         name = self.cleaned_data["name"].strip()
+        if '<' in name or '>' in name:
+            raise forms.ValidationError("HTML tags are not allowed")
         if not name:
             raise forms.ValidationError("Name cannot be empty")
         return name

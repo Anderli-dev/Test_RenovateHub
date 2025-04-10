@@ -55,6 +55,8 @@ hx-target-error="#error-modal"
                 name="name"
                 placeholder="Start typing here to create a task..." 
                 aria-label="Add Task"
+                required
+                maxlength="255"
                 >
                 <input type="hidden" name="project_id" value="{{ project.id }}">
                 <button 
