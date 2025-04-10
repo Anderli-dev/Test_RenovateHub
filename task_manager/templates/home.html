@@ -34,7 +34,12 @@
                 </button>
             </div>
         </div>
-
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Hello!</h4>
+            <p>Please, <a href="/accounts/login">log in to your account</a>, to view your projects and tasks.</p>
+        </div>
+    {% endif %}
         <script>
             document.body.setAttribute('hx-headers', '{"X-CSRFToken": "{{ csrf_token }}"}');
         </script>
@@ -56,10 +61,4 @@
                 document.querySelector('dialog[open]').close();
             });
         </script>
-    {% else %}
-        <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">Hello!</h4>
-            <p>Please, <a href="/accounts/login">log in to your account</a>, to view your projects and tasks.</p>
-        </div>
-    {% endif %}
 {% endblock %}

@@ -6,7 +6,7 @@ from task_manager.views import task, project
 
 urlpatterns = [
     path('', home, name='home'),
-    path('project/<int:id>', project.get_project, name='get_project'),
+    path('project/<int:project_id>', project.get_project, name='get_project'),
     path('task-add/', task.task_add, name='task_add'),
     path('task/<int:task_id>/delete/', task.task_delete, name='task_delete'),
     path('task_reorder/', task.task_reorder, name='task_reorder'),

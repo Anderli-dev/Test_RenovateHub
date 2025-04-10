@@ -1,7 +1,10 @@
 import copy
+import json
 
+from django.http import HttpRequest
 from django.http.request import HttpRequest, QueryDict
 from django.http.response import HttpResponse
+from django.template.response import TemplateResponse
 from django.utils.functional import wraps
 from render_block import render_block_to_string
 
@@ -116,3 +119,11 @@ def make_get_request(request: HttpRequest) -> HttpRequest:
     new_request.POST = QueryDict()
     new_request.method = "GET"
     return new_request
+
+def render_htmx_error(request: HttpRequest, message: str, trigger: str = "error"):
+    context = {"error_message": message}
+    response = TemplateResponse(request, "error_modal.html", context=context, status=403)
+    response["Hx-Trigger"] = json.dumps({
+        trigger: message,
+    })
+    return response
