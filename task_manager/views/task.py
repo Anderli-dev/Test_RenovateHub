@@ -96,10 +96,16 @@ def task_reorder(request):
         },
     )
     
+@require_POST
 def toggle_task_status(request, task_id):
     task = get_object_or_404(Task, id=task_id)
+    project = task.project
+
+    if not request.user.is_authenticated or project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
+    
     task.toggle_status()
-    print(task.status)
+
     project = get_object_or_404(Project, id=task.project.id)
     return TemplateResponse(
         request,
