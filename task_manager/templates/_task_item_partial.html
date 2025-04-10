@@ -54,7 +54,7 @@
                         <button 
                         class="btn btn-sm btn-danger action-btn" 
                         style="--bs-btn-padding-y: 0;"
-                        hx-delete="{% url 'task_delete' task.id %}"
+                        hx-post="{% url 'task_delete' task.id %}"
                         hx-target="#project-{{project.id}}"
                         >
                         Delete

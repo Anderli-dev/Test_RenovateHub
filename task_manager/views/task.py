@@ -36,12 +36,15 @@ def task_add(request: HttpRequest):
         },
     )
     
+@require_POST
 def task_delete(request: HttpRequest, task_id: int):
     task = get_object_or_404(Task, id=task_id)
-    project = get_object_or_404(Project, id=task.project.id)
+    project = task.project
+
+    if project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
     
-    if request.method == "DELETE":
-        task.delete()
+    task.delete()
     
     return TemplateResponse(
         request,
@@ -59,7 +62,7 @@ def task_reorder(request):
     task = get_object_or_404(Task, id=task_id)
 
     if new_order != task.order:
-            # Отримуємо всі таски цього проекту, крім поточної
+            # We get all the tasks of this project, except for the current one
             tasks = Task.objects.filter(project=task.project).exclude(id=task.id).order_by("order")
 
             updated_order = 0
