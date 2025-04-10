@@ -13,7 +13,7 @@ def get_project(request: HttpRequest, project_id: int):
     project = get_object_or_404(Project, id=project_id)
     
     if project.user != request.user:
-        return render_htmx_error(request, "Access denied!")
+        return render_htmx_error(request, "Access denied!", 403)
     
     return TemplateResponse(
         request,

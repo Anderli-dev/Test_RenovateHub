@@ -23,8 +23,9 @@
     <body hx-ext="response-targets">
         <div
             hx-trigger="error from:body"
+            id="error-decorator"
         >
-            <div id="error-modal"></div>
+            <div id="error-modal" hx-swap="innerHTML"></div>
         </div>
         <nav>
             {% if user.is_authenticated %}
@@ -37,24 +38,24 @@
         {% block body %}{% endblock %}
     </body>
     <script>
-        const errorToast = document.getElementById('error-modal');
-        
+        const errorDecorator = document.getElementById('error-decorator');
+    
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    setTimeout(() => {
-                    node.classList.add('fade');
-                    node.addEventListener('transitionend', () => node.remove());
-                    }, 5000);
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        const errorModal = document.getElementById('error-modal');
+                        if (errorModal) {
+                            setTimeout(() => {
+                                errorModal.innerHTML = '';
+                            }, 5000);
+                        }
+                    });
                 }
-                });
-            }
             }
         });
-        
-        observer.observe(errorToast, { childList: true });
+    
+        observer.observe(errorDecorator, { childList: true });
     </script>
     <script>
         /*
@@ -130,6 +131,6 @@
         
             updateOrder(projectID);
         }
-        </script>
+    </script>
         
 </html>

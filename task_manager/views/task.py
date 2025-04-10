@@ -1,5 +1,5 @@
 
-from django.db import transaction
+import json
 from django.db.models import Max
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
@@ -8,12 +8,17 @@ from django.views.decorators.http import require_POST
 
 from task_manager.forms import TaskCreateForm
 from task_manager.models import Project, Task
+from task_manager.utils import render_htmx_error
 
 
 @require_POST
 def task_add(request: HttpRequest):
     form = TaskCreateForm(request.POST)
     project = get_object_or_404(Project, id=request.POST.get("project_id"))
+    
+    if project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
+    
     if form.is_valid():
         task = form.save(commit=False)
         max_order = Task.objects.filter(project=project).aggregate(Max("order"))["order__max"]
@@ -21,8 +26,7 @@ def task_add(request: HttpRequest):
         task.project = project
         task.save()
     else: 
-        pass
-        # TODO add error handler
+        return render_htmx_error(request, "Wrong input data!", 403)
 
     return TemplateResponse(
         request,

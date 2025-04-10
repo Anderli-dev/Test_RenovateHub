@@ -120,9 +120,9 @@ def make_get_request(request: HttpRequest) -> HttpRequest:
     new_request.method = "GET"
     return new_request
 
-def render_htmx_error(request: HttpRequest, message: str, trigger: str = "error"):
+def render_htmx_error(request: HttpRequest, message: str, status_code: int, trigger: str = "error"):
     context = {"error_message": message}
-    response = TemplateResponse(request, "error_modal.html", context=context, status=403)
+    response = TemplateResponse(request, "error_modal.html", context=context, status=status_code)
     response["Hx-Trigger"] = json.dumps({
         trigger: message,
     })
