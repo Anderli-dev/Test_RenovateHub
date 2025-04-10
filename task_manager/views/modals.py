@@ -33,11 +33,13 @@ def create_project(request: HttpRequest):
                 }
             )
         else: 
-            return render_htmx_error(request, "Wrong input data!", 403)
+            return render_htmx_error(request, "Wrong input data!", 400)
     else:
         form = ProjectForm()
     return TemplateResponse(request, "modals_add_project.html", {"form": form})
 
+@require_http_methods(["GET", "POST"])
+@login_required
 def edit_project(request: HttpRequest, id: int):
     project = get_object_or_404(Project, id=id)
     if request.method == "POST":
@@ -54,6 +56,8 @@ def edit_project(request: HttpRequest, id: int):
                     )
                 }
             )
+        else: 
+            return render_htmx_error(request, "Wrong input data!", 400)
     else:
         form = ProjectForm(instance=project)
     return TemplateResponse(request, "modals_edit_project.html", {"form": form})
