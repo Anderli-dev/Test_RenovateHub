@@ -56,11 +56,21 @@ def task_delete(request: HttpRequest, task_id: int):
     
 @require_POST
 def task_reorder(request):
-    task_id = int(request.POST.get("task_id"))
-    new_order = int(request.POST.get("new_order"))
+    try:
+        task_id = int(request.POST.get("task_id"))
+        new_order = int(request.POST.get("new_order"))
+    except (TypeError, ValueError):
+        return render_htmx_error(request, "Incorrect data!", 400)
 
     task = get_object_or_404(Task, id=task_id)
+    project = task.project
 
+    if not request.user.is_authenticated or project.user != request.user:
+        return render_htmx_error(request, "Access denied!", 403)
+    
+    if new_order < 0:
+        return render_htmx_error(request, "Incorrect order!", 400)
+    
     if new_order != task.order:
             # We get all the tasks of this project, except for the current one
             tasks = Task.objects.filter(project=task.project).exclude(id=task.id).order_by("order")
