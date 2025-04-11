@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 
 from task_manager.models import Project
-from task_manager.utils import for_htmx
+from task_manager.utils.utils_htmx import for_htmx
 from django.template.response import TemplateResponse
 
 @for_htmx(use_block_from_params=True)

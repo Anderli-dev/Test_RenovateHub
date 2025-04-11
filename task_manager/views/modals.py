@@ -8,8 +8,8 @@ from django.views.decorators.http import require_http_methods
 
 from task_manager.forms import ProjectForm, TaskEditForm
 from task_manager.models import Project, Task
-
-from task_manager.utils import for_htmx, render_htmx_error
+from task_manager.utils.render_htmx_error import render_htmx_error
+from task_manager.utils.utils_htmx import for_htmx
 
 
 @require_http_methods(["GET", "POST"])

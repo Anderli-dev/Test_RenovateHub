@@ -119,11 +119,3 @@ def make_get_request(request: HttpRequest) -> HttpRequest:
     new_request.POST = QueryDict()
     new_request.method = "GET"
     return new_request
-
-def render_htmx_error(request: HttpRequest, message: str, status_code: int, trigger: str = "error"):
-    context = {"error_message": message}
-    response = TemplateResponse(request, "error_modal.html", context=context, status=status_code)
-    response["Hx-Trigger"] = json.dumps({
-        trigger: message,
-    })
-    return response
