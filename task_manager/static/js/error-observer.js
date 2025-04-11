@@ -14,3 +14,5 @@ const observer = new MutationObserver((mutationsList) => {
         }
     }
 });
+
+observer.observe(errorDecorator, { childList: true });
