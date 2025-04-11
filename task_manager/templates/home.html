@@ -2,16 +2,17 @@
 {% block body %}
     {% if user.is_authenticated %}
         <div class="container my-4">
-            <div class="row justify-content-center gap-4">
+            <div class="justify-content-center gap-4">
 
                 {% block projects-list %}
                     <div
-                    id="projects-list"
-                    hx-trigger="projectChanged from:body"
-                    hx-get="."
-                    hx-vals='{"use_block": "projects-list"}'
-                    hx-target="#projects-list"
-                    hx-swap="outerHTML"
+                        id="projects-list"
+                        class="row gap-4 justify-content-center"
+                        hx-trigger="projectChanged from:body"
+                        hx-get="."
+                        hx-vals='{"use_block": "projects-list"}'
+                        hx-target="#projects-list"
+                        hx-swap="outerHTML"
                     >
                         {% if projects %}
                             {% for project in projects %}
@@ -23,16 +24,21 @@
                         {% comment %} TODO partial load {% endcomment %}
                     </div>
                 {% endblock %}
-                
-                <button 
-                hx-trigger="click"
-                hx-get="{% url 'modals_add_project' %}"
-                hx-target="body"
-                hx-target-4*="#error-modal"
-                hx-swap="beforeend"
-                >
-                Add project
-                </button>
+                <div class="d-flex justify-content-center mt-4">
+                    <button
+                        hx-trigger="click"
+                        hx-get="{% url 'modals_add_project' %}"
+                        hx-target="body"
+                        hx-target-4*="#error-modal"
+                        hx-swap="beforeend"
+                        class="btn btn-primary ps-0"
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 17">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                    Add TODO list
+                    </button>
+                </div>
             </div>
         </div>
     {% else %}

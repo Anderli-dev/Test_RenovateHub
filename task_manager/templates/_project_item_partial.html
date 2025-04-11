@@ -1,10 +1,10 @@
 <div 
-class="card px-0 col-md-12 col-xl-10"
-id="project-{{project.id}}"
-hx-trigger="taskChanged from:body"
-hx-get="{% url 'get_project' project.id %}"
-hx-target="#project-{{project.id}}"
-hx-target-error="#error-modal"
+    class="card px-0 col-12 col-xl-10"
+    id="project-{{project.id}}"
+    hx-trigger="taskChanged from:body"
+    hx-get="{% url 'get_project' project.id %}"
+    hx-target="#project-{{project.id}}"
+    hx-target-error="#error-modal"
 >
     <div class="card-header d-flex align-items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar4" viewBox="0 0 16 16">
@@ -14,21 +14,21 @@ hx-target-error="#error-modal"
         {% comment %} TODO on edit change this dive not all list {% endcomment %}
         {% comment %} TODO btns show on hover {% endcomment %}
         <button 
-        class="mb-0"
-        hx-trigger="click"
-        hx-get="{% url 'modals_edit_project' project.id %}"
-        hx-target="body"
-        hx-target-4*="#error-modal"
-        hx-swap="beforeend"
+            class="mb-0"
+            hx-trigger="click"
+            hx-get="{% url 'modals_edit_project' project.id %}"
+            hx-target="body"
+            hx-target-4*="#error-modal"
+            hx-swap="beforeend"
         >
         edit
         </button>
         <button 
-        class="mb-0"
-        hx-get="{% url 'modals_delete_project' project.id %}"
-        hx-target="body"
-        hx-target-4*="#error-modal"
-        hx-swap="beforeend"
+            class="mb-0"
+            hx-get="{% url 'modals_delete_project' project.id %}"
+            hx-target="body"
+            hx-target-4*="#error-modal"
+            hx-swap="beforeend"
         >
         delete
         </button>
@@ -38,34 +38,34 @@ hx-target-error="#error-modal"
         <div class="d-flex align-items-center" x-data="{ search: '' }">
             <form class="flex-grow-1 me-2">
                 <button 
-                class="btn" 
-                type="submit"
-                hx-post="{% url 'task_add' %}"
-                hx-target="#project-{{project.id}}"
-                hx-target-4*="#error-modal"
-                hx-swap="outerHTML"
+                    class="btn" 
+                    type="submit"
+                    hx-post="{% url 'task_add' %}"
+                    hx-target="#project-{{project.id}}"
+                    hx-target-4*="#error-modal"
+                    hx-swap="outerHTML"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                     </svg>
                 </button>
                 <input 
-                class="form-control col-sm" 
-                type="text" 
-                name="name"
-                placeholder="Start typing here to create a task..." 
-                aria-label="Add Task"
-                required
-                maxlength="255"
+                    class="form-control col-sm" 
+                    type="text" 
+                    name="name"
+                    placeholder="Start typing here to create a task..." 
+                    aria-label="Add Task"
+                    required
+                    maxlength="255"
                 >
                 <input type="hidden" name="project_id" value="{{ project.id }}">
                 <button 
-                class="btn btn-outline-success" 
-                type="submit"
-                hx-post="{% url 'task_add' %}"
-                hx-target="#project-{{project.id}}"
-                hx-target-4*="#error-modal"
-                hx-swap="outerHTML"
+                    class="btn btn-outline-success" 
+                    type="submit"
+                    hx-post="{% url 'task_add' %}"
+                    hx-target="#project-{{project.id}}"
+                    hx-target-4*="#error-modal"
+                    hx-swap="outerHTML"
                 >
                 Add Task
                 </button>
