@@ -1,6 +1,6 @@
 {% block task-form %}
     <div 
-        class="container mb-3 mb-sm-2 mb-md-0"
+        class="container mb-3 mb-sm-2 mb-md-0 border-top draggable"
         id="task-{{ task.id }}"
         draggable="true"
         data-task-id="{{ task.id }}"
@@ -10,7 +10,7 @@
         ondrop="onDrop(event, {{project.id}})"
     >
         <div class="row justify-content-between">
-            <div class="row col justify-content-between pb-1 pb-sm-0">
+            <div class="row col justify-content-between pb-1 pb-sm-0" >
                 <div class="col form-check col d-flex align-items-center">
                     <input 
                         class="form-check-input" 
@@ -22,9 +22,9 @@
                         hx-target-4*="#error-modal"
                         hx-swap="outerHTML"
                     >
-                    <label class="form-check-label ms-2" for="item1">
+                    <p class="m-0 ms-2 d-flex align-items-center " style="cursor: default; user-select: text;">
                         {{ task.name }}
-                    </label>
+                    </p>
                 </div>
                 <div class="col d-flex flex-row-reverse align-items-center">
                     <div class="d-flex flex-column">

@@ -18,6 +18,16 @@
                 opacity: 0;
                 transition: opacity 0.5s ease-out;
             }
+            .draggable {
+                cursor: grab; /* або move, depending on UX */
+            }
+            
+            .draggable:active {
+                cursor: grabbing;
+            }
+            .draggable:first-of-type {
+                border-top: none !important;
+            }
         </style>
         
     </head>
