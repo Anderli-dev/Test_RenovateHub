@@ -28,6 +28,19 @@
             .draggable:first-of-type {
                 border-top: none !important;
             }
+            .task-hover-controls{
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease-in-out;
+            }
+            .task:hover .task-hover-controls{
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .selecteble{
+                cursor: default; 
+                user-select: text;
+            }
         </style>
         
     </head>

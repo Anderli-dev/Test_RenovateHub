@@ -1,6 +1,6 @@
 {% block task-form %}
     <div 
-        class="container mb-3 mb-sm-2 mb-md-0 border-top draggable"
+        class="task container mb-3 mb-sm-2 mb-md-0 border-top draggable"
         id="task-{{ task.id }}"
         draggable="true"
         data-task-id="{{ task.id }}"
@@ -22,11 +22,11 @@
                         hx-target-4*="#error-modal"
                         hx-swap="outerHTML"
                     >
-                    <p class="m-0 ms-2 d-flex align-items-center " style="cursor: default; user-select: text;">
+                    <p class="m-0 ms-2 d-flex align-items-center selecteble">
                         {{ task.name }}
                     </p>
                 </div>
-                <div class="col d-flex flex-row-reverse align-items-center">
+                <div class="col d-flex flex-row-reverse align-items-center task-hover-controls">
                     <div class="d-flex flex-column">
                         <button class="btn p-0" onclick="moveTask(this, 'up', {{project.id}})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 -6 16 16">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-auto p-0 d-flex align-items-center gap-2 ps-4 ps-md-0">
+            <div class="col-12 col-md-auto p-0 d-flex align-items-center gap-2 ps-4 ps-md-0 task-hover-controls">
                 <button 
                     class="btn btn-sm btn-warning action-btn" 
                     style="--bs-btn-padding-y: 0;"
