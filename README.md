@@ -43,8 +43,8 @@ A simple and responsive web application to help you organize projects and manage
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/fastapi-app.git
-   cd fastapi-app
+   git clone https://github.com/Anderli-dev/Test_RenovateHub.git
+   cd Test_RenovateHub
    ```
 
 2. Create a virtual environment (optional but recommended):
@@ -68,4 +68,4 @@ docker-compose up --build
 ```
 
 6. The application doc will be available at:
-- [http://localhost:8000](http://localhost:8000/docs)
+- [http://localhost:8000](http://localhost:8000)
