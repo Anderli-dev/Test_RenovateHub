@@ -8,6 +8,17 @@ class ProjectForm(ModelForm):
         model = Project
         fields = ["name"]
         
+        widgets = {
+            "name": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter project name",
+                "hx-trigger": "input changed delay:500ms",
+                "hx-post": ".", 
+                "hx-target": "#project-name-errors",
+                "hx-swap": "innerHTML"
+            }),
+        }
+        
     def clean_name(self):
         name = self.cleaned_data["name"].strip()
         if not name:
