@@ -1,14 +1,25 @@
-<dialog id="dialog-main" data-onload-showmodal>
-    {% block dialog-contents %}
-        <form
-            hx-post="{{ request.get_full_path }}"
-            hx-target="#dialog-main"
-            hx-vals='{"use_block": "dialog-contents"}'
-            hx-swap="innerHTML"
-        >
-        {% block form_contents %}{% endblock %}
-
-        {% block form_buttons %}{% endblock %}
-        </form>
-    {% endblock %}
+<dialog id="dialog-main" data-onload-showmodal class="d-block rounded bg-dark border p-0">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content content d-inline-flex">
+        {% block dialog-contents %}
+            <form
+                hx-post="{{ request.get_full_path }}"
+                hx-target="#dialog-main"
+                hx-vals='{"use_block": "dialog-contents"}'
+                hx-swap="innerHTML"
+                class="row g-0"
+            >
+                <div class="border-bottom col-12 p-3">
+                    <h5 class="modal-title">{% block form_title %}{% endblock %}</h5>
+                </div>
+                <div class="col-12  p-3">
+                    {% block form_contents %}{% endblock %}
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-end flex-wrap gap-2 col-12 p-3 border-top">
+                    {% block form_buttons %}{% endblock %}
+                </div>
+            </form>
+        {% endblock %}
+        </div>
+    </div>
 </dialog>

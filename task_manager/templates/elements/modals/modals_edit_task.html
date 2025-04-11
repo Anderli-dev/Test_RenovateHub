@@ -1,11 +1,12 @@
 {% extends "elements/modal_base.html" %}
+{% block form_title %}
+Add project
+{% endblock %}
 {% block form_contents %}
     {{ form.as_p }}
 {% endblock %}
 
 {% block form_buttons %}
-    <div class="d-flex justify-content-between">
-        <button type="submit">Save</button>
-        <form method="dialog"><button>Cancel</button></form>
-    </div>
+    <form method="dialog" class="btn btn-secondary p-0"><button class="btn border-0 p-2 w-100">Close</button></form>
+    <button type="submit" class="btn btn-primary py-2">Save</button>
 {% endblock %}
