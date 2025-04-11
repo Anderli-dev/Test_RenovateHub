@@ -2,10 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
-from task_manager.models import Project
-import json
 
-from task_manager.utils import render_htmx_error
+from task_manager.models import Project
+from task_manager.utils.render_htmx_error import render_htmx_error
 
 
 @login_required

@@ -7,7 +7,7 @@ from django.views.decorators.http import require_POST
 
 from task_manager.forms import TaskCreateForm
 from task_manager.models import Project, Task
-from task_manager.utils import render_htmx_error
+from task_manager.utils.render_htmx_error import render_htmx_error
 
 
 @require_POST
