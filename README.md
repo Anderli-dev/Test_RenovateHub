@@ -41,13 +41,31 @@ A simple and responsive web application to help you organize projects and manage
 
 ## 🛠️ Setup Instructions
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/fastapi-app.git
+   cd fastapi-app
+   ```
+
+2. Create a virtual environment (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Create a .env file in the root directory of the project.
+    You can use .env.sample as a template.
+    Make sure to update the values inside .env according to your local environment if needed.
+
+5. Start the application using Docker Compose:
 ```bash
-# Clone repository
-git clone https://github.com/yourname/productivity-manager.git
-cd productivity-manager
-
-# Set environment variables
-cp .env.example .env  # edit values as needed
-
-# Run with Docker Compose
 docker-compose up --build
+```
+
+6. The application doc will be available at:
+- [http://localhost:8000](http://localhost:8000/docs)
