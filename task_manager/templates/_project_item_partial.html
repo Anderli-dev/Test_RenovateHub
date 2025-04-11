@@ -16,7 +16,7 @@
         {% comment %} TODO on edit change this dive not all list {% endcomment %}
         <div class="d-flex align-items-center">
             <button 
-                class="btn p-0 mb-0"
+                class="btn p-0 mb-0 border-0"
                 hx-trigger="click"
                 hx-get="{% url 'modals_edit_project' project.id %}"
                 hx-target="body"
@@ -29,7 +29,7 @@
             </button>
             <p class="m-0 mx-2">|</p>
             <button 
-                class="btn p-0 mb-0"
+                class="btn p-0 mb-0 border-0"
                 hx-get="{% url 'modals_delete_project' project.id %}"
                 hx-target="body"
                 hx-target-4*="#error-modal"
