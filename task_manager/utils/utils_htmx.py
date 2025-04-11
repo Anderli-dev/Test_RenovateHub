@@ -1,10 +1,7 @@
 import copy
-import json
 
-from django.http import HttpRequest
 from django.http.request import HttpRequest, QueryDict
 from django.http.response import HttpResponse
-from django.template.response import TemplateResponse
 from django.utils.functional import wraps
 from render_block import render_block_to_string
 

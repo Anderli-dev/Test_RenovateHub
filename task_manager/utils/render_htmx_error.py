@@ -1,7 +1,6 @@
 import json
 
 from django.http import HttpRequest
-from django.http.request import HttpRequest
 from django.template.response import TemplateResponse
 
 def render_htmx_error(request: HttpRequest, message: str, status_code: int, trigger: str = "error"):
