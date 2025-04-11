@@ -28,17 +28,23 @@
             .draggable:first-of-type {
                 border-top: none !important;
             }
-            .task-hover-controls{
+            .task-hover-controls,
+            .project-hover-controls
+            {
                 opacity: 0;
                 pointer-events: none;
                 transition: opacity 0.3s ease-in-out;
             }
-            .task:hover .task-hover-controls{
+            .task-hover-container:hover .task-hover-controls,
+            .project-hover-container:hover .project-hover-controls
+            {
                 opacity: 1;
                 pointer-events: auto;
             }
             @media (max-width: 768px) {
-                .task-hover-controls{
+                .task-hover-controls, 
+                .project-hover-controls
+                {
                     opacity: 1;
                     pointer-events: auto;
                 }

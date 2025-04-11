@@ -6,7 +6,7 @@
     hx-target="#project-{{project.id}}"
     hx-target-error="#error-modal"
 >
-    <div class="card-header d-flex align-items-center jus gap-2 justify-content-between">
+    <div class="card-header d-flex align-items-center jus gap-2 justify-content-between project-hover-container">
         <div class="d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar4 d-none d-sm-block" viewBox="0 0 16 16">
                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
@@ -14,7 +14,7 @@
             <h2 class="mb-0 ms-2">{{project.name}}</h2>
         </div>
         {% comment %} TODO on edit change this dive not all list {% endcomment %}
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center project-hover-controls">
             <button 
                 class="btn p-0 mb-0 border-0"
                 hx-trigger="click"
