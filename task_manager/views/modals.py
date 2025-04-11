@@ -36,7 +36,7 @@ def create_project(request: HttpRequest):
             return render_htmx_error(request, "Wrong input data!", 400)
     else:
         form = ProjectForm()
-    return TemplateResponse(request, "modals_add_project.html", {"form": form})
+    return TemplateResponse(request, "elements/modals/modals_add_project.html", {"form": form})
 
 @require_http_methods(["GET", "POST"])
 @login_required
@@ -63,7 +63,7 @@ def edit_project(request: HttpRequest, id: int):
             return render_htmx_error(request, "Wrong input data!", 400)
     else:
         form = ProjectForm(instance=project)
-    return TemplateResponse(request, "modals_edit_project.html", {"form": form})
+    return TemplateResponse(request, "elements/modals/modals_edit_project.html", {"form": form})
 
 @require_http_methods(["GET", "POST"])
 @login_required 
@@ -86,7 +86,7 @@ def delete_project(request: HttpRequest, id: int):
             }
         )
 
-    return TemplateResponse(request, "modals_delete_project.html")
+    return TemplateResponse(request, "elements/modals/modals_delete_project.html")
 
 @require_http_methods(["GET", "POST"])
 @login_required 
@@ -115,4 +115,4 @@ def edit_task(request: HttpRequest, task_id: int):
             return render_htmx_error(request, "Wrong input data!", 400)
     else:
         form = TaskEditForm(instance=task)
-    return TemplateResponse(request, "modals_edit_task.html", {"form": form})
+    return TemplateResponse(request, "elements/modals/modals_edit_task.html", {"form": form})

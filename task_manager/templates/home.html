@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block body %}
     {% if user.is_authenticated %}
         <div class="container my-4">
@@ -60,25 +61,6 @@
             </div>
         </div>
     {% endif %}
-        <script>
-            document.body.setAttribute('hx-headers', '{"X-CSRFToken": "{{ csrf_token }}"}');
-        </script>
-
-        <script>
-            document.body.addEventListener("htmx:afterSettle", function(detail) {
-                const dialog = detail.target.querySelector('dialog[data-onload-showmodal]');
-                if (dialog) {
-                    dialog.showModal();
-                    dialog.addEventListener("close", () => {
-                        dialog.remove();
-                    });
-                };
-            });
-        </script>
-
-        <script>
-            document.body.addEventListener('closeModal', function() {
-                document.querySelector('dialog[open]').close();
-            });
-        </script>
+    <script src="{% static 'js/show-modal-handler.js' %}"></script> 
+    <script src="{% static 'js/close-modal-listener.js' %}"></script> 
 {% endblock %}

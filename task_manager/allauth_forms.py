@@ -5,7 +5,7 @@ class MyCustomLoginForm(LoginForm):
     def login(self, *args, **kwargs):
         self.fields["login"].widget.attrs.update({
             "class": "form-control",
-            "placeholder": "Username or Email"
+            "placeholder": "Username"
         })
         self.fields["password"].widget.attrs.update({
             "class": "form-control",

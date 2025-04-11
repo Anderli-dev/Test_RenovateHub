@@ -12,22 +12,22 @@ urlpatterns = [
     path('task_reorder/', task.task_reorder, name='task_reorder'),
     path('toggle_task_status/<int:task_id>', task.toggle_task_status, name='toggle_task_status'),
     path(
-        'modals-edit-task/<int:task_id>/edit/', 
+        'modal-edit-task/<int:task_id>/edit/', 
         modals.edit_task, 
         name='modals_edit_task'
         ),
     path(
-        'modals-add-project/', 
+        'modal-add-project/', 
         modals.create_project, 
         name='modals_add_project'
         ),
     path(
-        'modals-project/<int:id>/edit/', 
+        'modal-project/<int:id>/edit/', 
         modals.edit_project, 
         name='modals_edit_project'
         ),
     path(
-        'modals-project/<int:id>/delete/', 
+        'modal-project/<int:id>/delete/', 
         modals.delete_project, 
         name='modals_delete_project'
         ),
