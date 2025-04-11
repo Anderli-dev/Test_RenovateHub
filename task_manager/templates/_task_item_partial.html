@@ -1,17 +1,18 @@
 {% block task-form %}
     <div 
-    id="task-{{ task.id }}"
-    draggable="true"
-    data-task-id="{{ task.id }}"
-    data-order="{{ task.order }}"
-    ondragstart="onDragStart(event)"
-    ondragover="onDragOver(event)"
-    ondrop="onDrop(event, {{project.id}})"
+        class="container mb-3 mb-sm-2 mb-md-0"
+        id="task-{{ task.id }}"
+        draggable="true"
+        data-task-id="{{ task.id }}"
+        data-order="{{ task.order }}"
+        ondragstart="onDragStart(event)"
+        ondragover="onDragOver(event)"
+        ondrop="onDrop(event, {{project.id}})"
     >
-            <div class="container d-flex flex-column">
-                <li class="d-flex align-items-center justify-content-between">
-                    <div class="form-check">
-                        <input 
+        <div class="row justify-content-between">
+            <div class="row col justify-content-between pb-1 pb-sm-0">
+                <div class="col form-check col d-flex align-items-center">
+                    <input 
                         class="form-check-input" 
                         type="checkbox" 
                         {% if task.status %}checked{% endif %}
@@ -20,50 +21,50 @@
                         hx-target="#project-{{ project.id }}"
                         hx-target-4*="#error-modal"
                         hx-swap="outerHTML"
-                        >
-                        <label class="form-check-label ms-2" for="item1">
-                            {{ task.name }}
-                        </label>
-                    </div>
-                    <div class="d-flex gap-3">
-                        <div class="btn-group btn-group-sm">
-                            <button 
-                            class="btn btn-outline-secondary"
-                            onclick="moveTask(this, 'up', {{project.id}})"
-                            >
-                            ⬆
-                            </button>
-                            <button 
-                            class="btn btn-outline-secondary"
-                            onclick="moveTask(this, 'down', {{project.id}})"
-                            >
-                            ⬇
-                            </button>
-                            <input type="hidden" name="task_id" value="{{ task.id }}">
-                            <input type="hidden" name="new_order" value="{{ task.order }}">
-                        </div>
-                        <button 
-                        class="btn btn-sm btn-warning action-btn" 
-                        style="--bs-btn-padding-y: 0;"
-                        hx-trigger="click"
-                        hx-get="{% url 'modals_edit_task' task.id %}"
-                        hx-target="#project-{{project.id}}"
-                        hx-target-4*="#error-modal"
-                        hx-swap="beforeend"
-                        >
-                        Edit
+                    >
+                    <label class="form-check-label ms-2" for="item1">
+                        {{ task.name }}
+                    </label>
+                </div>
+                <div class="col d-flex flex-row-reverse align-items-center">
+                    <div class="d-flex flex-column">
+                        <button class="btn p-0" onclick="moveTask(this, 'up', {{project.id}})">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 -6 16 16">
+                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                            </svg>
                         </button>
-                        <button 
-                        class="btn btn-sm btn-danger action-btn" 
-                        style="--bs-btn-padding-y: 0;"
-                        hx-post="{% url 'task_delete' task.id %}"
-                        hx-target="#project-{{project.id}}"
-                        hx-target-4*="#error-modal"
-                        >
-                        Delete
+                        <button class="btn p-0" onclick="moveTask(this, 'down', {{project.id}})">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 6 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
                         </button>
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <input type="hidden" name="new_order" value="{{ task.order }}">
                     </div>
-                </li>
+                </div>
             </div>
+            <div class="col-12 col-md-auto p-0 d-flex align-items-center gap-2 ps-4 ps-md-0">
+                <button 
+                    class="btn btn-sm btn-warning action-btn" 
+                    style="--bs-btn-padding-y: 0;"
+                    hx-trigger="click"
+                    hx-get="{% url 'modals_edit_task' task.id %}"
+                    hx-target="#project-{{project.id}}"
+                    hx-target-4*="#error-modal"
+                    hx-swap="beforeend"
+                >
+                Edit
+                </button>
+                <button 
+                    class="btn btn-sm btn-danger action-btn" 
+                    style="--bs-btn-padding-y: 0;"
+                    hx-post="{% url 'task_delete' task.id %}"
+                    hx-target="#project-{{project.id}}"
+                    hx-target-4*="#error-modal"
+                >
+                Delete
+                </button>
+            </div>
+        </div>
     </div>
 {% endblock %}

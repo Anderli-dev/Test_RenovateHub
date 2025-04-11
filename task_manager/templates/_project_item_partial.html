@@ -35,7 +35,7 @@
     </div>
 
     <nav class="card-header bg-body-tertiary ps-0">
-        <div class="d-flex align-items-center" x-data="{ search: '' }">
+        <div class="d-flex align-items-center">
             <form class="flex-grow-1 me-2">
                 <button 
                     class="btn" 
@@ -75,7 +75,7 @@
         </div>
     </nav>
 
-    <div id="tasks-list-{{project.id}}">
+    <div id="tasks-list-{{project.id}}" class="container py-2">
         {% if project.tasks.all %}
             {% for task in project.tasks.all%}
                 {% include "_task_item_partial.html" %}
