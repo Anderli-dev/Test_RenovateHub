@@ -1,51 +1,55 @@
 {% extends "account/base_entrance.html" %}
-{% load allauth i18n %}
+{% load allauth i18n widget_tweaks %}
+
 {% block head_title %}
     {% trans "Signup" %}
 {% endblock head_title %}
-{% block extra_head %}
-    <style>
-        .errorlist{
-            color:red;
-        }
-    </style>
-{% endblock extra_head %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    {% setvar link %}
-        <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
-        </a>
-    {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
+    <h1 class="text-center mb-4">{% trans "Sign Up" %}</h1>
+
+    <p class="text-center">
+        {% blocktranslate %}
+            Already have an account? Then please <a href="{{ login_url }}">sign in</a>.
+        {% endblocktranslate %}
+    </p>
+
     {% if not SOCIALACCOUNT_ONLY %}
         {% url 'account_signup' as action_url %}
-        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button tags="prominent,signup" type="submit" %}
+        <form method="post" action="{{ action_url }}">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">
+                        {{ field.label }}
+                    </label>
+                    {{ field|add_class:"form-control" }}
+                    {% for error in field.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            {{ redirect_field }}
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
                     {% trans "Sign Up" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
+                </button>
+            </div>
+        </form>
     {% endif %}
+
     {% if PASSKEY_SIGNUP_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
-            {% trans "Sign up using a passkey" %}
-        {% endelement %}
+        <hr />
+        <div class="d-grid mt-3">
+            <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary">
+                {% trans "Sign up using a passkey" %}
+            </a>
+        </div>
     {% endif %}
+
     {% if SOCIALACCOUNT_ENABLED %}
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}

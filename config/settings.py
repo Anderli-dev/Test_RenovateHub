@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     'allauth',
     'allauth.account',
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 LOGIN_REDIRECT_URL="/"
+
+ACCOUNT_FORMS = {'login': 'task_manager.allauth_forms.MyCustomLoginForm'}
