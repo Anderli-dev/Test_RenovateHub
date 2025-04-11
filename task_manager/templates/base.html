@@ -15,47 +15,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
         {% block extrahead %}
         {% endblock %}
-        <style>
-            .fade {
-                opacity: 0;
-                transition: opacity 0.5s ease-out;
-            }
-            .draggable {
-                cursor: grab; /* або move, depending on UX */
-            }
-            
-            .draggable:active {
-                cursor: grabbing;
-            }
-            .draggable:first-of-type {
-                border-top: none !important;
-            }
-            .task-hover-controls,
-            .project-hover-controls
-            {
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease-in-out;
-            }
-            .task-hover-container:hover .task-hover-controls,
-            .project-hover-container:hover .project-hover-controls
-            {
-                opacity: 1;
-                pointer-events: auto;
-            }
-            @media (max-width: 768px) {
-                .task-hover-controls, 
-                .project-hover-controls
-                {
-                    opacity: 1;
-                    pointer-events: auto;
-                }
-            }
-            .selecteble{
-                cursor: default; 
-                user-select: text;
-            }
-        </style>
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
         
     </head>
     <body hx-ext="response-targets">

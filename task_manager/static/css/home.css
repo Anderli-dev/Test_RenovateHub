@@ -1,0 +1,39 @@
+.fade {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+.draggable {
+    cursor: grab; /* або move, depending on UX */
+}
+
+.draggable:active {
+    cursor: grabbing;
+}
+.draggable:first-of-type {
+    border-top: none !important;
+}
+.task-hover-controls,
+.project-hover-controls
+{
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+.task-hover-container:hover .task-hover-controls,
+.project-hover-container:hover .project-hover-controls
+{
+    opacity: 1;
+    pointer-events: auto;
+}
+@media (max-width: 768px) {
+    .task-hover-controls, 
+    .project-hover-controls
+    {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+.selecteble{
+    cursor: default; 
+    user-select: text;
+}
