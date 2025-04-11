@@ -1,0 +1,11 @@
+{% extends "elements/modal_base.html" %}
+{% block form_contents %}
+    <h3>Are You Sure?</h3>
+{% endblock %}
+
+{% block form_buttons %}
+    <div class="d-flex justify-content-between">
+        <button type="submit">Delete</button>
+        <form method="dialog"><button>Cancel</button></form>
+    </div>
+{% endblock %}

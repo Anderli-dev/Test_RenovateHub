@@ -6,9 +6,9 @@
             hx-vals='{"use_block": "dialog-contents"}'
             hx-swap="innerHTML"
         >
-        {{ form.as_p }}
+        {% block form_contents %}{% endblock %}
 
-        <button type="submit">Add</button>
+        {% block form_buttons %}{% endblock %}
         </form>
     {% endblock %}
 </dialog>
