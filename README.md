@@ -67,5 +67,5 @@ A simple and responsive web application to help you organize projects and manage
 docker-compose up --build
 ```
 
-6. The application doc will be available at:
+6. The application will be available at:
 - [http://localhost:8000](http://localhost:8000)
