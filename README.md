@@ -66,6 +66,15 @@ A simple and responsive web application to help you organize projects and manage
 ```bash
 docker-compose up --build
 ```
+6. Apply migrations after launch: In a new terminal (in parallel with Docker):
+```bash
+docker-compose exec web python manage.py migrate
+```
 
-6. The application will be available at:
+7. The application will be available at:
 - [http://localhost:8000](http://localhost:8000)
+
+If necessary, you can also create a superuser:
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
